@@ -36,13 +36,13 @@ foreach ($dateien as $datei) {
     $neueDateiName = $metadataPfad . '/' . $dateiInfo['basename'] . '.txt';
 
     if (file_exists($neueDateiName)) {
-        echo "<tr><td>{$dateiInfo['basename']}</td><td class='error'>Übersprungen (existiert bereits)</td></tr>";
+        echo "<tr><td>{$dateiInfo['basename']}</td><td class='error'>Skipped (File Existing)</td></tr>";
         continue;
     }
 
     $handle = fopen($datei, 'rb');
     if ($handle === false) {
-        echo "<tr><td>{$dateiInfo['basename']}</td><td class='error'>Fehler beim Öffnen.</td></tr>";
+        echo "<tr><td>{$dateiInfo['basename']}</td><td class='error'>Failed to open file.</td></tr>";
         continue;
     }
 
@@ -55,12 +55,12 @@ foreach ($dateien as $datei) {
     $daten = json_decode($jsonString, true);
 
     if (!isset($daten['__metadata__'])) {
-        echo "<tr><td>{$dateiInfo['basename']}</td><td class='error'>Enthält keine '__metadata__'.</td></tr>";
+        echo "<tr><td>{$dateiInfo['basename']}</td><td class='error'>No Data Found '__metadata__'.</td></tr>";
         continue;
     }
 
     file_put_contents($neueDateiName, json_encode($daten['__metadata__'], JSON_PRETTY_PRINT));
-    echo "<tr><td>{$dateiInfo['basename']}</td><td class='success'>Erfolgreich erstellt</td></tr>";
+    echo "<tr><td>{$dateiInfo['basename']}</td><td class='success'>Metadata Extracted Successful</td></tr>";
 }
 
 echo "
