@@ -4,9 +4,9 @@
 $safetensorsPfad = __DIR__ . '/safetensors';
 $metadataPfad = __DIR__ . '/metadata';
 
-if (!file_exists($metadataPfad)) {
-    mkdir($metadataPfad, 0777, true);
-}
+#if (!file_exists($metadataPfad)) {
+#    mkdir($metadataPfad, 0777, true);
+#}
 
 $dateien = glob($safetensorsPfad . '/*.safetensors');
 
